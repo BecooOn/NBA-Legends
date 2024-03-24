@@ -1,12 +1,12 @@
-## Live site url 
-# https://nba-legends-becoo.netlify.app/
+## Live site url <br>
+
+https://nba-legends-becoo.netlify.app/
+
 ##
+
 <img src="./src/assets/nba.gif/" width="200px"><br>
 
-<p>Clarusway<img align="right"
-  src="https://secure.meetupstatic.com/photos/event/3/1/b/9/600_488352729.jpeg"  width="15px"></p>
-
-<br>
+##
 
 # Project-003: NBA Legends App
 
