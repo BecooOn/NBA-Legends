@@ -1,27 +1,34 @@
 import React from "react";
-import nbaImage from "../assets/nba-logo.png";
+import nbaLogo from "../assets/nba-logo.png";
 
-const Header = ({ name,searchTerm, setSearchTerm }) => {
-   
-
-//   const handleInputChange = (event) => {
-//     setSearchTerm(event.target.value); // Input değerini güncelle
-//   };
-//   console.log(searchTerm);
+const Header = ({ data, search, setSearch,sameTeam,setSameTeam }) => {
+  const arrTeam = data.map((team) => team.team);
+  // console.log(arrTeam);
+  const filteredTeams = arrTeam.filter(
+    (item, index) => arrTeam.indexOf(item) === index
+  );
+  filteredTeams.unshift("All Stars")
+  // console.log(filteredTeams);
   return (
     <div className="header">
-      <div className="nba-image">
-        <img src={nbaImage} alt="" />
-      </div>
-      <div className="searhArea">
+      <img src={nbaLogo} alt={nbaLogo} id="logo"/>
+      <div>
         <h1>NBA Legends</h1>
         <input
           type="search"
-          placeholder="Search player..."
-          id="input"
-          value={searchTerm} // Input değerini state'ten al
-          onInput={(event) => setSearchTerm(event.target.value)} // Input değişikliği için dinleyici
+          className="search"
+          name="search"
+          value={search}
+          placeholder="Search Player..."
+          onChange={(e) => setSearch(e.target.value)}
         />
+      </div>
+      <div className="btnDiv">
+        {filteredTeams.map((team) => (
+          <button className="btns" key={team} onClick={() => setSameTeam(team)}>
+            {team}
+          </button>
+        ))}
       </div>
     </div>
   );

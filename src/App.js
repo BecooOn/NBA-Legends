@@ -1,24 +1,18 @@
-import React,{ useState } from "react";
-import "./App.css";
-import { data } from "./helper/data";
+import React, { useState } from "react";
 import Header from "./components/Header";
+import { data } from "./helper/data";
+import "./App.css";
 import CardContainer from "./components/CardContainer";
-// console.log(data);
 
 const App = () => {
-  const name = data.map((item) => item.name);
-//   const img = data.map((item) => item.img);
-//   const statistics = data.map((item) => item.statistics);
-  
-  const [searchTerm, setSearchTerm] = useState("");
-
-
+    const [search, setSearch] = useState("");
+    const [sameTeam, setSameTeam] = useState("All Stars");
   return (
     <div>
-      <Header name={name} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-      <CardContainer Data={data} searchTerm={searchTerm}/>
+      <Header data={data} search={search} setSearch={setSearch} sameTeam={sameTeam} setSameTeam={setSameTeam}/>
+      <CardContainer data={data} search={search} sameTeam={sameTeam}/>
     </div>
   );
 };
-// name={name} img={img} statistics={statistics}
+
 export default App;

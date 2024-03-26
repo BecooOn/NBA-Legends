@@ -1,46 +1,50 @@
 import React, { useState } from "react";
-// import { data } from "../helper/data";
-import "../App.css";
 
-const PlayerCard = ({ players, searchTerm }) => {
-  const filteredPlayers = players.filter((player) =>
-    player.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ); //!Değişiklikleri anlık olarak almak için filter kullanıyoruz.
-  const [showStats, setShowStats] = useState(Array(players.length).fill(false));
-  // Oyuncu kartına tıklama fonksiyonu
-  const handlePlayerClick = (index) => {
-    // Tıklanan oyuncunun index'ine göre gösterim durumunu güncelle.
-    setShowStats(showStats.map((item, idx) => (idx === index ? !item : item)));
-  };
+const PlayerCard = ({ player, filteredTeam, sameTeam }) => {
+  const [showStatistics, setShowStatistics] = useState(false);
+  // console.log(filteredTeam);
+  function handleShowStatistics() {
+    setShowStatistics(!showStatistics);
+  }
   return (
-    <div className="player-card">
-      {filteredPlayers.map((item, index) => (
-        <div
-          key={item.name}
-          className="card"
-          onClick={() => handlePlayerClick(index)}
-        >
-          {showStats[index] ? (
-            <div>
-              {/* İstatistikler gösteriliyor */}
-              <ul className="statisticsList">
-                {item.statistics.map((stat, idx) => (
-                  <li key={idx}>{stat}</li>
-                ))}
-              </ul>
+    <>
+      {sameTeam !== "All Stars" ? (
+        <div onClick={handleShowStatistics} className="card">
+          {!showStatistics ? (
+            <div className="img-container">
+              <img src={filteredTeam.img} alt="" />
             </div>
           ) : (
-            // Resim gösteriliyor
-            <div className="imageDiv">
-              <img src={item.img} alt={item.name} className="images" />
-            </div>
+            <ul className="statisticList">
+              {filteredTeam.statistics.map((statistic, index) => (
+                <li key={index}>{statistic}</li>
+              ))}
+            </ul>
           )}
-          <div className="playerNameDiv">
-            <p className="playerNameText">{item.name}</p>
-          </div>
+
+          <h2 className="card-info">{filteredTeam.name}</h2>
+          <h4 className="card-info-team">{filteredTeam.team}</h4>
         </div>
-      ))}
-    </div>
+      ) : (
+        <div onClick={handleShowStatistics} className="card">
+          {!showStatistics ? (
+            <div className="img-container">
+              <img src={player.img} alt="" />
+            </div>
+          ) : (
+            <ul className="statisticList">
+              {player.statistics.map((statistic, index) => (
+                <li key={index}>{statistic}</li>
+              ))}
+            </ul>
+          )}
+
+          <h2 className="card-info">{player.name}</h2>
+          <h4 className="card-info-team">{player.team}</h4>
+        </div>
+      )}
+    </>
   );
 };
+
 export default PlayerCard;
